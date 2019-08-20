@@ -1,11 +1,16 @@
 function testInfo(texto, regexInput) {
+  $('#teste').removeClass('is-valid');
+  $('#teste').removeClass('is-invalid');
   var re = RegExp(`${regexInput.value}`);
   var OK = re.exec(texto.value);
+  console.log(texto);
   if (OK)
-    window.alert("tah certo");
+    $('#teste').addClass('is-valid');
   else
-    window.alert("tah errado");
+    $('#teste').addClass('is-invalid');
 }
+
+
 
 var nodes = new vis.DataSet([
   { id: 1, label: 'Node 1' },
