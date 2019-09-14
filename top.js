@@ -19,6 +19,11 @@ function criarLinha() {
   cell2.innerHTML = '<input type="text">';
 }
 
+function removerLinha() {
+  var tabela = document.getElementById('tabela');
+  var row = tabela.deleteRow(tabela.rows.length - 1);
+}
+
 var container = document.getElementById('mynetwork');
 var nodes = [], edges = [], graph;
 nodes = new vis.DataSet();
