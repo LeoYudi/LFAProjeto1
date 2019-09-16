@@ -43,21 +43,21 @@
         </div>
       </div>
       <table id="tabela" class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">S</th>
-            <th scope="col">oie</th>
-          </tr>
-        </thead>
         <tbody>
+          <tr>
+            <td><input placeholder="S" type="text"></td>
+            <td><input placeholder="oie" type="text"></td>
+          </tr>
           <tr>
             <td><input type="text"></td>
             <td><input type="text"></td>
           </tr>
         </tbody>
       </table>
-      <button onclick="criarLinha()">ADICIONA LINHA</button>
-      <button onclick="removerLinha()">REMOVE LINHA</button>
+      <div class="row">
+        <button class="btn mr-2" onclick="criarLinha()">ADICIONA LINHA</button>
+        <button class="btn" onclick="removerLinha()">REMOVE LINHA</button>
+      </div>
     </div>
   </div>
 

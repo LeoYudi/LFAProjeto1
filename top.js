@@ -17,18 +17,40 @@ function criarLinha() {
   var cell2 = row.insertCell(1);
   cell1.innerHTML = '<input type="text">';
   cell2.innerHTML = '<input type="text">';
+  // console.log(tabela.rows[1].cells[0].childNodes[0].value);
 }
 
 function removerLinha() {
   var tabela = document.getElementById('tabela');
-  var row = tabela.deleteRow(tabela.rows.length - 1);
+  tabela.deleteRow(tabela.rows.length - 1);
 }
 
 function testarGramatica() {
-  var tabela = document.getElementById('tabela');
-  var texto = document.getElementById('texto');
+  const tabela = document.getElementById('tabela');
+  const linhas = tabela.rows;
+  const input = document.getElementById('texto');
+  var texto = input.value;
+  var i = 0;
 
-  var
+  if (recursiva(linhas, texto, i, 'S')) {
+
+  }
+}
+
+function recursiva(linhas, texto, i, naoTerminal) {
+  var char = texto.charAt(i);
+  if (i < texto.length) {
+    linhas.forEach(element => {
+      if (element.cells[0].childNodes[0].value === naoTerminal) {
+        if (element.cells[1].childNodes[0].value.charAt(0) === char) {
+          recursiva(linhas, texto, i + 1);
+        }
+        else {
+
+        }
+      }
+    });
+  }
 }
 
 var container = document.getElementById('mynetwork');
