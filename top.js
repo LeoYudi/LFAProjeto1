@@ -24,6 +24,13 @@ function removerLinha() {
   var row = tabela.deleteRow(tabela.rows.length - 1);
 }
 
+function testarGramatica() {
+  var tabela = document.getElementById('tabela');
+  var texto = document.getElementById('texto');
+
+  var
+}
+
 var container = document.getElementById('mynetwork');
 var nodes = [], edges = [], graph;
 nodes = new vis.DataSet();
