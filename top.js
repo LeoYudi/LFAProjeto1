@@ -17,7 +17,7 @@ function criarLinha() {
   var cell2 = row.insertCell(1);
   cell1.innerHTML = '<input type="text">';
   cell2.innerHTML = '<input type="text">';
-  // console.log(tabela.rows[1].cells[0].childNodes[0].value);
+  // console.log(pegarValor(tabela.rows, 0, 0));
 }
 
 function removerLinha() {
@@ -25,32 +25,31 @@ function removerLinha() {
   tabela.deleteRow(tabela.rows.length - 1);
 }
 
-function testarGramatica() {
-  const tabela = document.getElementById('tabela');
-  const linhas = tabela.rows;
-  const input = document.getElementById('texto');
-  var texto = input.value;
-  var i = 0;
-
-  if (recursiva(linhas, texto, i, 'S')) {
-
+class Gramatica {
+  constructor(init) {
+    this.init = init
+    this.regras = pegarGramatica();
   }
 }
 
-function recursiva(linhas, texto, i, naoTerminal) {
-  var char = texto.charAt(i);
-  if (i < texto.length) {
-    linhas.forEach(element => {
-      if (element.cells[0].childNodes[0].value === naoTerminal) {
-        if (element.cells[1].childNodes[0].value.charAt(0) === char) {
-          recursiva(linhas, texto, i + 1);
-        }
-        else {
+function pegarValor(linhas, linha, cell) {
+  return linhas[linha].cells[cell].childNodes[0].value;
+}
 
-        }
-      }
-    });
+function pegarGramatica() {
+  let linhas = document.getElementById('tabela').rows;
+  let gramatica = {}
+  for (i = 0; i < linhas.length; i++) {
+    if (gramatica.findIndex(pegarValor(linhas, i, 0)) != -1) {
+      gramatica[gramatica.findIndex(pegarValor(linhas, i, 0))].push(pegarValor(linhas, i, 1));
+    }
+    else {
+      // gramatica.push(pegarValor(linhas, i, 0));
+      gramatica[gramatica.findIndex(pegarValor(linhas, i, 0))].push(pegarValor(linhas, i, 1));
+    }
   }
+
+  return gramatica;
 }
 
 var container = document.getElementById('mynetwork');
