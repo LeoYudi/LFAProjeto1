@@ -17,7 +17,6 @@ function criarLinha() {
   var cell2 = row.insertCell(1);
   cell1.innerHTML = '<input type="text">';
   cell2.innerHTML = '<input type="text">';
-  // console.log(pegarValor(tabela.rows, 0, 0));
 }
 
 function removerLinha() {
@@ -36,19 +35,23 @@ function pegarValor(linhas, linha, cell) {
   return linhas[linha].cells[cell].childNodes[0].value;
 }
 
+
+function testar() {
+  var gramatica = new Gramatica('S');
+}
+
 function pegarGramatica() {
   let linhas = document.getElementById('tabela').rows;
   let gramatica = {}
   for (i = 0; i < linhas.length; i++) {
-    if (gramatica.findIndex(pegarValor(linhas, i, 0)) != -1) {
-      gramatica[gramatica.findIndex(pegarValor(linhas, i, 0))].push(pegarValor(linhas, i, 1));
+    if (gramatica[pegarValor(linhas, i, 0)]) {
+      gramatica[pegarValor(linhas, i, 0)].push(pegarValor(linhas, i, 1));
     }
     else {
       // gramatica.push(pegarValor(linhas, i, 0));
-      gramatica[gramatica.findIndex(pegarValor(linhas, i, 0))].push(pegarValor(linhas, i, 1));
+      gramatica[pegarValor(linhas, i, 0)] = [pegarValor(linhas, i, 1)];
     }
   }
-
   return gramatica;
 }
 
