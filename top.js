@@ -40,14 +40,44 @@ function testar() {
   var texto = document.getElementById('texto').value;
   $('#texto').removeClass('is-valid');
   $('#texto').removeClass('is-invalid');
-  if (verifica(texto, gramatica, 'S')) {
+  if (verifica(gramatica, texto, 'S')) {
     $('#texto').addClass('is-invalid');
   }
   else
     $('#texto').addClass('is-valid');
 }
 
-function verificaCaractere(texto, gramatica, prop) {
+function verifica(gramatica, texto, prop) {
+  if (texto) {
+    for (i = 0; i < gramatica[prop].length; i++) {
+      if (texto.charAt(0) === gramatica[prop][i].charAt(0)) {
+        if (gramatica[prop][i].toLowerCase() === gramatica[prop][i]) {  //se eh terminal
+          if (texto.substr(1)) // se ainda tem texto
+            return false
+          else
+            return true;
+        }
+        else {
+          for (j = 0; j < gramatica[prop][i].length; j++) {
+            if (isUpper(gramatica[prop][i].charAt(j))) {  //se eh prop
+              if (verifica(gramatica, texto.substr(1), gramatica[prop][i].charAt(j))) //recursao
+                return true;
+              else
+                return false;
+            }
+          }
+        }
+      }
+    }
+  }
+  else return true;
+}
+
+function isUpper(char) {
+  if (x.charCodeAt(0) >= 65 && x.charCodeAt(0) <= 90)
+    return true;
+  else
+    return false;
 }
 
 function pegarGramatica() {
