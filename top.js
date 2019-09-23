@@ -35,7 +35,7 @@ function pegarValor(linhas, linha, cell) {
   return linhas[linha].cells[cell].childNodes[0].value;
 }
 
-function testar() {
+function testarGramatica() {
   var gramatica = new Gramatica('S');
   var texto = document.getElementById('texto').value;
   $('#texto').removeClass('is-valid');
