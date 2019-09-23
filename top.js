@@ -35,21 +35,42 @@ function pegarValor(linhas, linha, cell) {
   return linhas[linha].cells[cell].childNodes[0].value;
 }
 
-
 function testar() {
   var gramatica = new Gramatica('S');
+  var texto = document.getElementById('texto').value;
+  $('#texto').removeClass('is-valid');
+  $('#texto').removeClass('is-invalid');
+  if (verifica(texto, gramatica, 'S')) {
+    $('#texto').addClass('is-invalid');
+  }
+  else
+    $('#texto').addClass('is-valid');
+}
+
+function verificaCaractere(texto, gramatica, prop) {
 }
 
 function pegarGramatica() {
   let linhas = document.getElementById('tabela').rows;
   let gramatica = {}
   for (i = 0; i < linhas.length; i++) {
-    if (gramatica[pegarValor(linhas, i, 0)]) {
-      gramatica[pegarValor(linhas, i, 0)].push(pegarValor(linhas, i, 1));
+    if (pegarValor(linhas, i, 0).length == 1) {
+      if (pegarValor(linhas, i, 1)) {
+        if (gramatica[pegarValor(linhas, i, 0)]) {
+          gramatica[pegarValor(linhas, i, 0)].push(pegarValor(linhas, i, 1));
+        }
+        else {
+          // gramatica.push(pegarValor(linhas, i, 0));
+          gramatica[pegarValor(linhas, i, 0)] = [pegarValor(linhas, i, 1)];
+        }
+      }
+      else {
+        alert('Coluna vazia!!');
+      }
     }
     else {
-      // gramatica.push(pegarValor(linhas, i, 0));
-      gramatica[pegarValor(linhas, i, 0)] = [pegarValor(linhas, i, 1)];
+      alert('Mais de um caractere como definição de uma propriedade ou coluna vazia!!');
+      return;
     }
   }
   return gramatica;
