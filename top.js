@@ -26,8 +26,36 @@ function removerLinha() {
 
 class Gramatica {
   constructor(init) {
-    this.init = init
+    this.init = init;
     this.regras = pegarGramatica();
+    this.verifica = this.verifica.bind(this);
+  };
+
+  verifica(texto, prop) {
+    let recursiva = false;
+    if (texto.substr(1)) {
+      console.log('entro no if');
+      recursiva = false
+      for (i = 0; i < this.regras[prop].length; i++) {
+        if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
+          recursiva = true;
+          if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
+            return true;
+          else
+            return false;
+        }
+      }
+      if (!recursiva)
+        return false;
+    }
+    else {
+      console.log(texto);
+      for (i = 0; i < this.regras[prop].length; i++) {
+        if (texto === this.regras[prop][i])
+          return true;
+      }
+      return false;
+    }
   }
 }
 
@@ -36,48 +64,16 @@ function pegarValor(linhas, linha, cell) {
 }
 
 function testarGramatica() {
-  var gramatica = new Gramatica('S');
-  var texto = document.getElementById('texto').value;
+  let gramatica = new Gramatica('S');
+  let texto = document.getElementById('texto').value;
+  console.log(gramatica);
   $('#texto').removeClass('is-valid');
   $('#texto').removeClass('is-invalid');
-  if (verifica(gramatica, texto, 'S')) {
-    $('#texto').addClass('is-invalid');
-  }
-  else
+  if (gramatica.verifica(texto, 'S')) {
     $('#texto').addClass('is-valid');
-}
-
-function verifica(gramatica, texto, prop) {
-  if (texto) {
-    for (i = 0; i < gramatica[prop].length; i++) {
-      if (texto.charAt(0) === gramatica[prop][i].charAt(0)) {
-        if (gramatica[prop][i].toLowerCase() === gramatica[prop][i]) {  //se eh terminal
-          if (texto.substr(1)) // se ainda tem texto
-            return false
-          else
-            return true;
-        }
-        else {
-          for (j = 0; j < gramatica[prop][i].length; j++) {
-            if (isUpper(gramatica[prop][i].charAt(j))) {  //se eh prop
-              if (verifica(gramatica, texto.substr(1), gramatica[prop][i].charAt(j))) //recursao
-                return true;
-              else
-                return false;
-            }
-          }
-        }
-      }
-    }
   }
-  else return true;
-}
-
-function isUpper(char) {
-  if (x.charCodeAt(0) >= 65 && x.charCodeAt(0) <= 90)
-    return true;
   else
-    return false;
+    $('#texto').addClass('is-invalid');
 }
 
 function pegarGramatica() {
