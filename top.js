@@ -38,11 +38,15 @@ class Gramatica {
       recursiva = false
       for (i = 0; i < this.regras[prop].length; i++) {
         if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
-          recursiva = true;
-          if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
-            return true;
-          else
+          if (!(this.regras[prop][i].charAt(1)))
             return false;
+          else {
+            recursiva = true;
+            if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
+              return true;
+            else
+              return false;
+          }
         }
       }
       if (!recursiva)
