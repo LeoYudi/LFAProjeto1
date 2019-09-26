@@ -3,7 +3,7 @@ function testInfo(texto, regexInput) {
   $('#teste').removeClass('is-invalid');
   var re = RegExp(`${regexInput.value}`);
   var OK = re.exec(texto.value);
-  console.log(texto);
+  console.log(OK);
   if (OK)
     $('#teste').addClass('is-valid');
   else
