@@ -28,13 +28,12 @@ class Gramatica {
   constructor(init) {
     this.init = init;
     this.regras = pegarGramatica();
-    this.verifica = this.verifica.bind(this);
   };
 
   verifica(texto, prop) {
     let recursiva = false;
     if (texto.substr(1)) {
-      console.log('entro no if');
+      console.log(texto.charAt(0));
       recursiva = false
       for (i = 0; i < this.regras[prop].length; i++) {
         if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
