@@ -20,28 +20,42 @@ class Gramatica {
 
     verifica(texto, prop) {
         let recursiva = false;
-        if (texto.substr(1)) {
-            console.log(texto.charAt(0));
-            recursiva = false
-            for (let i = 0; i < this.regras[prop].length; i++) {
-                if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
-                    if (!(this.regras[prop][i].charAt(1)))
-                        return false;
-                    else {
-                        recursiva = true;
-                        if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
-                            return true;
+        if (texto) {
+            if (texto.substr(1)) {
+                console.log(texto);
+                console.log(prop);
+                recursiva = false
+                for (let i = 0; i < this.regras[prop].length; i++) {
+                    if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
+                        if (!(this.regras[prop][i].charAt(1)))
+                            return false;
+                        else {
+                            if (this.regras[this.regras[prop][i].charAt(1)]) {  //verifica se a regra existe
+                                recursiva = true;
+                                if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
+                                    return true;
+                            }
+                        }
                     }
                 }
-                console.log(i);
+                if (!recursiva)
+                    return false;
             }
-            if (!recursiva)
-                return false;
+            else {
+                console.log(prop);
+                for (let i = 0; i < this.regras[prop].length; i++) {
+                    if (texto === this.regras[prop][i])
+                        return true;
+                }
+                if (this.verifica(texto.concat('ª'), prop))
+                    return true;
+                else
+                    return false;
+            }
         }
         else {
-            console.log(texto);
             for (let i = 0; i < this.regras[prop].length; i++) {
-                if (texto === this.regras[prop][i])
+                if (this.regras[prop][i] === 'ª')
                     return true;
             }
             return false;
