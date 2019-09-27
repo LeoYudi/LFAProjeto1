@@ -35,7 +35,7 @@ class Gramatica {
     if (texto.substr(1)) {
       console.log(texto.charAt(0));
       recursiva = false
-      for (i = 0; i < this.regras[prop].length; i++) {
+      for (let i = 0; i < this.regras[prop].length; i++) {
         if (texto.charAt(0) === this.regras[prop][i].charAt(0)) { //verifica se primeiro char = primeiro char da prop
           if (!(this.regras[prop][i].charAt(1)))
             return false;
@@ -43,17 +43,16 @@ class Gramatica {
             recursiva = true;
             if (this.verifica(texto.substr(1), this.regras[prop][i].charAt(1))) //recursao
               return true;
-            else
-              return false;
           }
         }
+        console.log(i);
       }
       if (!recursiva)
         return false;
     }
     else {
       console.log(texto);
-      for (i = 0; i < this.regras[prop].length; i++) {
+      for (let i = 0; i < this.regras[prop].length; i++) {
         if (texto === this.regras[prop][i])
           return true;
       }
